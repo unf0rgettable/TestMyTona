@@ -7,35 +7,30 @@ namespace MyProject.Character
 {
     public abstract class Character : MonoBehaviour
     {
-        private List<IHPChangeListener> HpChangeListeners = new List<IHPChangeListener>();
-
         [SerializeField] private float health = 3;
-
-        public float Health
+        [SerializeField] private float maxHealth = 3;
+        protected float Health
         {
             get => health;
-            protected set => health = value;
+            set => health = value;
         }
-
-        [SerializeField] private float maxHealth = 3;
-
+        
         public float MaxHealth
         {
             get => maxHealth;
             protected set => maxHealth = value;
         }
-    
-
         protected Action<float, float> OnHPChange { get; set; }
-
+        
+        private readonly List<IHPChangeListener> _hpChangeListeners = new List<IHPChangeListener>();
+        
         public abstract void TakeDamage(float amount);
     
         private void Awake()
         {
             OnHPChange += (f, f1) =>
             {
-                Debug.Log("hpChange!!! " + HpChangeListeners.Count + " name " + gameObject.name);
-                foreach (var hpChange in HpChangeListeners)
+                foreach (var hpChange in _hpChangeListeners)
                 {
                     hpChange.UpdateHP(f,f1);
                 }
@@ -44,17 +39,17 @@ namespace MyProject.Character
 
         public void AddListener(IHPChangeListener hpChangeListeners)
         {
-            if (!HpChangeListeners.Contains(hpChangeListeners))
+            if (!_hpChangeListeners.Contains(hpChangeListeners))
             {
-                HpChangeListeners.Add(hpChangeListeners);
+                _hpChangeListeners.Add(hpChangeListeners);
             }
         }
     
         public void RemoveListener(IHPChangeListener hpChangeListeners)
         {
-            if (HpChangeListeners.Contains(hpChangeListeners))
+            if (_hpChangeListeners.Contains(hpChangeListeners))
             {
-                HpChangeListeners.Remove(hpChangeListeners);
+                _hpChangeListeners.Remove(hpChangeListeners);
             }
         }
     }

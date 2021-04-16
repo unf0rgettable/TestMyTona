@@ -6,6 +6,7 @@ namespace MyProject.Data
 	[CreateAssetMenu(menuName = "Data/LevelData")]
 	public class LevelData : ScriptableObject
 	{
+		
 		public int Index;
 
 		public bool[,] GetMap()
