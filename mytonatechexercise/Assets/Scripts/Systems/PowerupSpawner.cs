@@ -1,59 +1,52 @@
-﻿using MyProject.Events;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MyProject.Events;
 using UnityEngine;
 
-// Bad class
-// Rewrite it
 public class PowerupSpawner : MonoBehaviour
 {
-	[Range(0, 100)] public float HealthUpgradeWeight = 10;
-	[Range(0, 100)] public float DamageUpgradeWeight = 10;
-	[Range(0, 100)] public float MoveSpeedUpgradeWeight = 5;
-	[Range(0, 100)] public float HealWeight = 25;
-	[Range(0, 100)] public float WeaponChangeWeight = 2;
-	[Range(0, 100)] public float RifleWeight = 25;
-	[Range(0, 100)] public float AutomaticRifleWeight = 15;
-	[Range(0, 100)] public float ShotgunWeight = 20;
+	[SerializeField][Range(0, 100)] private int HealthUpgradeWeight = 10;
+	[SerializeField][Range(0, 100)] private int DamageUpgradeWeight = 10;
+	[SerializeField][Range(0, 100)] private int MoveSpeedUpgradeWeight = 5;
+	[SerializeField][Range(0, 100)] private int HealWeight = 25;
+	[SerializeField][Range(0, 100)] private int RifleWeight = 25;
+	[SerializeField][Range(0, 100)] private int AutomaticRifleWeight = 15;
+	[SerializeField][Range(0, 100)] private int ShotgunWeight = 20;
 
-	public PowerUp HealthPrefab;
-	public PowerUp DamagePrefab;
-	public PowerUp MoveSpeedPrefab;
-	public HealthPack HealPrefab;
-	public WeaponPowerUp RiflePrefab;
-	public WeaponPowerUp AutomaticRifleWPrefab;
-	public WeaponPowerUp ShotgunPrefab;
+	[SerializeField] private PowerUp HealthPrefab;
+	[SerializeField] private PowerUp DamagePrefab;
+	[SerializeField] private PowerUp MoveSpeedPrefab;
+	[SerializeField] private HealthPack HealPrefab;
+	[SerializeField] private WeaponPowerUp RiflePrefab;
+	[SerializeField] private WeaponPowerUp AutomaticRifleWPrefab;
+	[SerializeField] private WeaponPowerUp ShotgunPrefab;
 
-	private float[] weights;
-	private float[] weaponWeights;
+	private List<int> powerUp = new List<int>();
+	private List<int> weights = new List<int>();
 
 	private GameObject[] prefabs;
-	private WeaponPowerUp[] weaponPrefabs;
 
 	private void Awake()
 	{
-		weights = new float[5];
-		weights[0] = HealthUpgradeWeight;
-		weights[1] = weights[0] + DamageUpgradeWeight;
-		weights[2] = weights[1] + MoveSpeedUpgradeWeight;
-		weights[3] = weights[2] + HealWeight;
-		weights[4] = weights[3] + WeaponChangeWeight;
+		powerUp.Add(HealthUpgradeWeight);
+		powerUp.Add(DamageUpgradeWeight);
+		powerUp.Add(MoveSpeedUpgradeWeight);
+		powerUp.Add(HealWeight);
+		powerUp.Add(RifleWeight);
+		powerUp.Add(AutomaticRifleWeight);
+		powerUp.Add(ShotgunWeight);
 
-		weaponWeights = new float[3];
-		weaponWeights[0] = RifleWeight;
-		weaponWeights[1] = weaponWeights[0] + AutomaticRifleWeight;
-		weaponWeights[2] = weaponWeights[1] + ShotgunWeight;
-
+		weights = CalculateWeight(powerUp);
+		
 		prefabs = new[]
 		{
 			HealthPrefab.gameObject,
 			DamagePrefab.gameObject,
 			MoveSpeedPrefab.gameObject,
-			HealPrefab.gameObject
-		};
-		weaponPrefabs = new[]
-		{
-			RiflePrefab,
-			AutomaticRifleWPrefab,
-			ShotgunPrefab
+			HealPrefab.gameObject,
+			RiflePrefab.gameObject,
+			AutomaticRifleWPrefab.gameObject,
+			ShotgunPrefab.gameObject,
 		};
 
 		EventBus.Sub(Handle, EventBus.MOB_KILLED);
@@ -68,6 +61,7 @@ public class PowerupSpawner : MonoBehaviour
 	{
 		var vector3 = new Vector3();
 		vector3.x = Random.value * 11 - 6;
+		vector3.y = 1;
 		vector3.z = Random.value * 11 - 6;
 		return vector3;
 	}
@@ -75,27 +69,49 @@ public class PowerupSpawner : MonoBehaviour
 
 	private void Spawn(Vector3 position)
 	{
-		var rand = Random.value * weights[4];
-		int i = 0;
-		while (i < 5 && weights[i] >= rand)
-		{
-			i++;
-		}
+		var rand = Random.Range(0, weights.Last() + 1);
 
-		if (i < 4)
+		Debug.Log(rand);
+
+		foreach (var wes in weights)
 		{
-			Instantiate(prefabs[Mathf.Min(3, i)], position, Quaternion.identity);
+			Debug.LogWarning(wes);
 		}
-		else
+		
+		if (TryGetPrefabByWeight(rand, out GameObject prefab))
 		{
-			rand = Random.value * weaponWeights[2];
-			i = 0;
-			while (i < 3 && weaponWeights[Mathf.Min(2, i)] >= rand)
+			if (prefab.TryGetComponent(out WeaponPowerUp weaponPowerUp))
 			{
-				i++;
+				if(weaponPowerUp.Type == Player.Instance.TypeWeapon)
+					return;
 			}
-
-			Instantiate(weaponPrefabs[Mathf.Min(2, i)], position, Quaternion.identity);
+			Instantiate(prefab, position, Quaternion.identity);
 		}
+	}
+	
+	private bool TryGetPrefabByWeight(int weight, out GameObject prefab)
+	{
+		for (int i = 0; i < weights.Count - 1; i++)
+		{
+			if (weight >= weights[i] && weight <= weights[i + 1])
+			{
+				prefab = prefabs[i];
+				return true;
+			}
+		}
+		prefab = null;
+		return false;
+	}
+
+	private List<int> CalculateWeight(List<int> powerUps)
+	{
+		List<int> tempWeights = new List<int>();
+		tempWeights.Add(0);
+		for (int i = 0; i < powerUps.Count; i++)
+		{
+			tempWeights.Add(tempWeights[i] + powerUps[i]);
+		}
+
+		return tempWeights;
 	}
 }

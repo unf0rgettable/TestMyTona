@@ -11,23 +11,21 @@ public class Player : MonoBehaviour
 	public float MoveSpeed = 3.5f;
 	public float Health = 3;
 	public float MaxHealth = 3;
-
+	public int TypeWeapon = 0;
 	public Action<int> OnWeaponChange = null;
 	public Action<float, float> OnHPChange = null;
 	public Action OnUpgrade = null;
 
 	private void Awake()
 	{
-		// if (Instance != null)
-		// {
-		// 	DestroyImmediate(gameObject);
-		// }
-		// else
-		// {
-		// 	Instance = this;
-		// }
-
-		Instance = this;
+		if (Instance != null)
+		{
+			DestroyImmediate(gameObject);
+		}
+		else
+		{
+			Instance = this;
+		}
 	}
 
 	private void OnDestroy()
@@ -77,6 +75,7 @@ public class Player : MonoBehaviour
 
 	public void ChangeWeapon(int type)
 	{
+		TypeWeapon = type;
 		OnWeaponChange?.Invoke(type);
 	}
 }

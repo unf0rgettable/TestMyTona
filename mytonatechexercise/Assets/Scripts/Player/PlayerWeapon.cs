@@ -30,5 +30,7 @@ public abstract class PlayerWeapon : MonoBehaviour
 		Model.SetActive(type == Type);
 	}
 
+	
+	
 	protected abstract void Fire(PlayerInputMessage message);
 }
