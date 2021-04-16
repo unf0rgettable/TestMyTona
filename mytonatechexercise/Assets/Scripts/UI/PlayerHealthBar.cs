@@ -1,7 +1,4 @@
-﻿using Character;
-using TMPro;
-using UI;
-using UnityEngine;
+﻿using UI;
 
 public class PlayerHealthBar : CharacterHealthBar
 {

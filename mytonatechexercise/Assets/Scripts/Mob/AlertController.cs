@@ -1,4 +1,3 @@
-using Character;
 using UnityEngine;
 
 public class AlertController : MonoBehaviour
