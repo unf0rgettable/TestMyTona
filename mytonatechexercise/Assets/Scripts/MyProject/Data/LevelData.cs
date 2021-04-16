@@ -6,8 +6,10 @@ namespace MyProject.Data
 	[CreateAssetMenu(menuName = "Data/LevelData")]
 	public class LevelData : ScriptableObject
 	{
-		
-		public int Index;
+		[SerializeField]
+		private int index;
+
+		public int Index => index;
 
 		public bool[,] GetMap()
 		{

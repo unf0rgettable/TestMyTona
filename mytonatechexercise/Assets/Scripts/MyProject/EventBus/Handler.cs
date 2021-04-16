@@ -4,7 +4,7 @@ namespace MyProject.Events
 {
 	public abstract class Handler<T> : MonoBehaviour where T : Message
 	{
-		public abstract void HandleMessage(T message);
+		protected abstract void HandleMessage(T message);
 
 		protected virtual void Awake()
 		{

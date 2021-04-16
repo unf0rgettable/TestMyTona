@@ -1,13 +1,14 @@
 using MyProject.Events;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace MyProject.Player
 {
 	public class PlayerInput : MonoBehaviour
 	{
-		public Camera Camera;
-		[FormerlySerializedAs("Player")] public PlayerCharacter playerCharacter;
+		[SerializeField] private Image aim;
+		private Camera _camera;
+		public PlayerCharacter playerCharacter;
 
 		private void Awake()
 		{
@@ -24,13 +25,20 @@ namespace MyProject.Player
 			enabled = false;
 		}
 
+		private void Start()
+		{
+			_camera = Camera.main;
+			Cursor.visible = false;
+		}
+
 		void Update()
 		{
 			var moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
 			// Bonus!
 			// Show this point as you want in HUD
-			var ray = Camera.ScreenPointToRay(Input.mousePosition);
+			aim.transform.position = Input.mousePosition;
+			var ray = _camera.ScreenPointToRay(Input.mousePosition);
 
 			var plane = new Plane(Vector3.up, Vector3.up * playerCharacter.transform.position.y);
 			plane.Raycast(ray, out var enter);

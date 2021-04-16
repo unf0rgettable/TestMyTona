@@ -4,23 +4,25 @@ namespace MyProject.Events
 {
 	public class ActivateOnEvent : MonoBehaviour
 	{
-		public int EventId = 0;
-		public GameObject Button;
+		[SerializeField]
+		private int eventId = 0;
+		[SerializeField]
+		private GameObject button;
 
 		private void Awake()
 		{
-			EventBus.Sub(HandleMessage, EventId);
+			EventBus.Sub(HandleMessage, eventId);
 		}
 
 		private void OnDestroy()
 		{
-			EventBus.Unsub(HandleMessage, EventId);
+			EventBus.Unsub(HandleMessage, eventId);
 		}
 
 
-		public void HandleMessage()
+		private void HandleMessage()
 		{
-			Button.SetActive(true);
+			button.SetActive(true);
 		}
 	}
 }

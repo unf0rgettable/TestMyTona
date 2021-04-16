@@ -202,8 +202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486f553d70504dd0bb7c4aceed161ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 6774057791072106384}
-  AttackTrigger: MeleeAttack
+  animator: {fileID: 6774057791072106384}
+  attackTrigger: MeleeAttack
 --- !u!114 &4349779707793009493
 MonoBehaviour:
   m_ObjectHideFlags: 0

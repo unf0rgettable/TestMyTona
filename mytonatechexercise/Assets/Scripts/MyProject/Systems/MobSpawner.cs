@@ -15,7 +15,7 @@ namespace MyProject.Systems
 			EventBus.Sub(Unsub, EventBus.PLAYER_DEATH);
 		}
 
-		public override void HandleMessage(SpawnMobMessage message)
+		protected override void HandleMessage(SpawnMobMessage message)
 		{
 			var position = new Vector3(Random.value * 11 - 6, 1, Random.value * 11 - 6);
 			Instantiate(Prefabs[message.Type], position, Quaternion.identity);

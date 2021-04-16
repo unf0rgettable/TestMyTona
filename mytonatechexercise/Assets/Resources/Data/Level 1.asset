@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6347a3ae2bfcf4a919dbacb57246d6, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  Index: 1
+  index: 1
   CharMap: '000000000000
 
     000000000000

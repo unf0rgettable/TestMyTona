@@ -5,18 +5,18 @@ namespace MyProject.Player
 {
 	public class PlayerAnimator : MonoBehaviour
 	{
-		[SerializeField]
-		public Animator Animator;
+		private Animator _animator;
 
 		private void Awake()
 		{
+			_animator = GetComponentInChildren<Animator>();
 			EventBus<PlayerInputMessage>.Sub(AnimateRun);
 			EventBus.Sub(AnimateDeath, EventBus.PLAYER_DEATH);
 		}
 
 		private void AnimateRun(PlayerInputMessage message)
 		{
-			Animator.SetBool("IsRun", message.MovementDirection.sqrMagnitude > 0);
+			_animator.SetBool("IsRun", message.MovementDirection.sqrMagnitude > 0);
 		}
 	
 		private void OnDestroy()
@@ -27,12 +27,12 @@ namespace MyProject.Player
 
 		private void AnimateDeath()
 		{
-			Animator.SetTrigger("Death");
+			_animator.SetTrigger("Death");
 		}
 
 		public void TriggerShoot()
 		{
-			Animator.SetTrigger("Shoot");
+			_animator.SetTrigger("Shoot");
 		}
 	}
 }

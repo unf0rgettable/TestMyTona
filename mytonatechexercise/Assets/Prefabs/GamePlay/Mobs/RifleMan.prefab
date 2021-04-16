@@ -95,10 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed265e9693642af46ae96fdb3563aa86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  maxHealth: 3
   Damage: 1
   MoveSpeed: 3.5
-  Health: 3
-  maxHealth: 3
 --- !u!114 &7983570968990229187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486f553d70504dd0bb7c4aceed161ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 9026209752835179921}
-  AttackTrigger: Shoot
+  animator: {fileID: 9026209752835179921}
+  attackTrigger: Shoot
 --- !u!114 &8610088509026123635
 MonoBehaviour:
   m_ObjectHideFlags: 0
