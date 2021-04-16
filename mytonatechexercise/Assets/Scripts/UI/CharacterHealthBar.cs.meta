@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bb3d32cd3f2245abb70385d298c53dbe
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Bar: {instanceID: 0}
+  - BarImg: {instanceID: 0}
+  - Text: {instanceID: 0}
+  - DamageTextPrefab: {fileID: 7425966607539429777, guid: eb927545724993c4a83dcc4a0652e8b5, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

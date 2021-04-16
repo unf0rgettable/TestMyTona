@@ -1,16 +1,28 @@
 using System;
-using System.Collections.Generic;
+using Character;
 using MyProject.Events;
 using UnityEngine;
 
-public class Mob : MonoBehaviour
+public class Mob : MonoBehaviour, ICharacter
 {
 	public float Damage = 1;
 	public float MoveSpeed = 3.5f;
 	public float Health = 3;
-	public float MaxHealth = 3;
+	[SerializeField]
+	private float maxHealth = 3;
 
-	public Action<float, float> OnHPChange = null;
+	private Action<float, float> _onHPChange = null;
+	public float MaxHealth
+	{
+		get => maxHealth;
+		private set => maxHealth = value;
+	}
+	
+	public Action<float, float> OnHPChange
+	{
+		get => _onHPChange;
+		set => _onHPChange = value;
+	}
 
 	public void TakeDamage(float amount)
 	{

@@ -1,20 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Character;
 using MyProject.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ICharacter
 {
 	public static Player Instance;
 	public float Damage = 1;
 	public float MoveSpeed = 3.5f;
 	public float Health = 3;
-	public float MaxHealth = 3;
+	[SerializeField]
+	private float maxHealth = 3;
 	public int TypeWeapon = 0;
 	public Action<int> OnWeaponChange = null;
-	public Action<float, float> OnHPChange = null;
+	private Action<float, float> _onHPChange = null;
 	public Action OnUpgrade = null;
+
+	public float MaxHealth
+	{
+		get => maxHealth;
+		private set => maxHealth = value;
+	}
+	public Action<float, float> OnHPChange
+	{
+		get => _onHPChange;
+		set => _onHPChange = value;
+	}
 
 	private void Awake()
 	{
@@ -78,4 +92,6 @@ public class Player : MonoBehaviour
 		TypeWeapon = type;
 		OnWeaponChange?.Invoke(type);
 	}
+
+
 }

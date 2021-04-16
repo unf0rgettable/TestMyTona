@@ -1,16 +1,17 @@
+using Character;
 using UnityEngine;
 
 public class AlertController : MonoBehaviour
 {
-    [SerializeField]
-    private SpriteRenderer alert;
+    private SpriteRenderer _alert;
     
     private Animator _animator;
     private AttackStateMachine _attackStateMachine;
     private Camera _camera;
     private void Awake()
     {
-        _animator = GetComponentInChildren<Animator>();
+        _alert = GetComponent<SpriteRenderer>();
+        _animator = GetComponentInParent<Mob>().GetComponentInChildren<Animator>();
         _attackStateMachine = _animator.GetBehaviour<AttackStateMachine>();
         _attackStateMachine.OnAttackStart = EnableAlert;
         _attackStateMachine.OnAttackFinish = DisableAlert;
@@ -19,16 +20,11 @@ public class AlertController : MonoBehaviour
 
     private void EnableAlert()
     {
-        alert.enabled = true;
+        _alert.enabled = true;
     }
     
     private void DisableAlert()
     {
-        alert.enabled = false;
-    }
-    
-    private void LateUpdate()
-    {
-        alert.transform.rotation = _camera.transform.rotation;
+        _alert.enabled = false;
     }
 }

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MyProject.Events;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PowerupSpawner : MonoBehaviour
 {
@@ -52,6 +54,11 @@ public class PowerupSpawner : MonoBehaviour
 		EventBus.Sub(Handle, EventBus.MOB_KILLED);
 	}
 
+	private void OnDestroy()
+	{
+		EventBus.Unsub(Handle, EventBus.MOB_KILLED);
+	}
+
 	private void Handle()
 	{
 		Spawn(PickRandomPosition());
@@ -71,13 +78,6 @@ public class PowerupSpawner : MonoBehaviour
 	{
 		var rand = Random.Range(0, weights.Last() + 1);
 
-		Debug.Log(rand);
-
-		foreach (var wes in weights)
-		{
-			Debug.LogWarning(wes);
-		}
-		
 		if (TryGetPrefabByWeight(rand, out GameObject prefab))
 		{
 			if (prefab.TryGetComponent(out WeaponPowerUp weaponPowerUp))
