@@ -11,16 +11,16 @@ public class Player : Character
 
 	public Action OnUpgrade = null;
 
-	private void Awake()
+	private void Start()
 	{
 		if (Instance != null)
-		{
-			DestroyImmediate(gameObject);
-		}
-		else
-		{
-			Instance = this;
-		}
+        {
+        	DestroyImmediate(gameObject);
+        }
+        else
+        {
+        	Instance = this;
+        }
 	}
 
 	private void OnDestroy()
@@ -31,7 +31,7 @@ public class Player : Character
 		}
 	}
 
-	public void TakeDamage(float amount)
+	public override void TakeDamage(float amount)
 	{
 		if (Health <= 0)
 			return;

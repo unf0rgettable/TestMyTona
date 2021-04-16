@@ -26,8 +26,24 @@ public class Projectile : MonoBehaviour
 		if (DamageMob && other.CompareTag("Mob"))
 		{
 			var mob = other.GetComponent<Mob>();
-			mob.TakeDamage(Damage);
-			destroyed = true;
+			if (Player.Instance.TypeWeapon == PlayerWeapon.RocketLauncher)
+			{
+				GetComponent<Explosion>().Exp(transform.position);
+				var charactersCollider = Physics.OverlapSphere(transform.position, 2);
+				foreach (var character in charactersCollider)
+				{
+					if (character.TryGetComponent(out Character characterType))
+					{
+						characterType.TakeDamage(Damage);
+					}
+				}				
+			}
+			else
+			{
+				mob.TakeDamage(Damage);
+			}
+
+			Destroy(gameObject);
 		}
 	}
 

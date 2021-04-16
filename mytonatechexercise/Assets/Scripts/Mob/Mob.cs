@@ -6,7 +6,7 @@ public class Mob : Character
 	public float Damage = 1;
 	public float MoveSpeed = 3.5f;
 
-	public void TakeDamage(float amount)
+	public override void TakeDamage(float amount)
 	{
 		if (Health <= 0)
 			return;

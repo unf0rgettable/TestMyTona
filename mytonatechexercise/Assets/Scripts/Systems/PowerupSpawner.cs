@@ -14,6 +14,7 @@ public class PowerupSpawner : MonoBehaviour
 	[SerializeField][Range(0, 100)] private int RifleWeight = 25;
 	[SerializeField][Range(0, 100)] private int AutomaticRifleWeight = 15;
 	[SerializeField][Range(0, 100)] private int ShotgunWeight = 20;
+	[SerializeField][Range(0, 100)] private int RocketWeight = 25;
 
 	[SerializeField] private PowerUp HealthPrefab;
 	[SerializeField] private PowerUp DamagePrefab;
@@ -22,6 +23,7 @@ public class PowerupSpawner : MonoBehaviour
 	[SerializeField] private WeaponPowerUp RiflePrefab;
 	[SerializeField] private WeaponPowerUp AutomaticRifleWPrefab;
 	[SerializeField] private WeaponPowerUp ShotgunPrefab;
+	[SerializeField] private WeaponPowerUp RocketPrefab;
 
 	private List<int> powerUp = new List<int>();
 	private List<int> weights = new List<int>();
@@ -37,6 +39,7 @@ public class PowerupSpawner : MonoBehaviour
 		powerUp.Add(RifleWeight);
 		powerUp.Add(AutomaticRifleWeight);
 		powerUp.Add(ShotgunWeight);
+		powerUp.Add(RocketWeight);
 
 		weights = CalculateWeight(powerUp);
 		
@@ -49,6 +52,7 @@ public class PowerupSpawner : MonoBehaviour
 			RiflePrefab.gameObject,
 			AutomaticRifleWPrefab.gameObject,
 			ShotgunPrefab.gameObject,
+			RocketPrefab.gameObject,
 		};
 
 		EventBus.Sub(Handle, EventBus.MOB_KILLED);

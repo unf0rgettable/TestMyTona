@@ -25,7 +25,9 @@ public abstract class Character : MonoBehaviour
 
     protected Action<float, float> OnHPChange { get; set; }
 
-    private void Start()
+    public abstract void TakeDamage(float amount);
+    
+    private void Awake()
     {
         OnHPChange += (f, f1) =>
         {

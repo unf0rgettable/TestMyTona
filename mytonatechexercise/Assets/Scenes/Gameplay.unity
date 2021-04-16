@@ -13501,6 +13501,7 @@ MonoBehaviour:
   RifleWeight: 25
   AutomaticRifleWeight: 15
   ShotgunWeight: 20
+  RocketWeight: 25
   HealthPrefab: {fileID: 8405059147930234413, guid: 8f6c5271876536241bbcf9f73f23ff12, type: 3}
   DamagePrefab: {fileID: 5976526244641019156, guid: a600c95c41182a047b40d909608fb03b, type: 3}
   MoveSpeedPrefab: {fileID: 7121340740650531902, guid: a4031b805f2c91f458b3a5a64f05eb7c, type: 3}
@@ -13508,6 +13509,7 @@ MonoBehaviour:
   RiflePrefab: {fileID: 802912271405016925, guid: c74f7ca528828694d96d08fb93f5b77d, type: 3}
   AutomaticRifleWPrefab: {fileID: 4866546695364694794, guid: 7d8c1fc07841e6345a83656c80f9e543, type: 3}
   ShotgunPrefab: {fileID: 7155297609261215702, guid: d92fd0077718c3840b7f41c84a6b8c6f, type: 3}
+  RocketPrefab: {fileID: 7155297609261215702, guid: 89f325f696f1f57468032783dcd56633, type: 3}
 --- !u!114 &1909521372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15717,6 +15719,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.013937919
       objectReference: {fileID: 0}
+    - target: {fileID: 1483767914143348273, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1698850339845288286, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.116384074
@@ -15765,6 +15771,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.50565505
       objectReference: {fileID: 0}
+    - target: {fileID: 2155775616383760372, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
+      propertyPath: Reload
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155775616383760372, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
+      propertyPath: BulletPrefab
+      value: 
+      objectReference: {fileID: 7677098091910664037, guid: 350733b6e1aeee349ae84db91d9de594, type: 3}
     - target: {fileID: 3286010165133135436, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.8318676e-15
@@ -15917,6 +15931,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4676656098883435532, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
+      propertyPath: TypeWeapon
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5066367661346099099, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.5511138e-17
@@ -16028,6 +16046,10 @@ PrefabInstance:
     - target: {fileID: 6316559125161684952, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.0000041360036
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360706026106163828, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6714948951542779340, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16185,6 +16207,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.68168586
       objectReference: {fileID: 0}
+    - target: {fileID: 8232909564386696073, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8244992334929901545, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.3306683e-16
@@ -16265,5 +16291,9 @@ PrefabInstance:
       propertyPath: DamageTextPrefab
       value: 
       objectReference: {fileID: 7425966607539429777, guid: eb927545724993c4a83dcc4a0652e8b5, type: 3}
+    - target: {fileID: 8894043958069823700, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e3a95f1983675429ca17362a0aad6c, type: 3}

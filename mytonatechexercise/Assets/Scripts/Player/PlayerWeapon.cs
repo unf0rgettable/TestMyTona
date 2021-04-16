@@ -6,6 +6,7 @@ public abstract class PlayerWeapon : MonoBehaviour
 	public const int Rifle = 0;
 	public const int Shotgun = 1;
 	public const int AutomaticRifle = 2;
+	public const int RocketLauncher = 3;
 	public abstract int Type { get; }
 	public GameObject Model;
 
