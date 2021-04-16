@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-	public int Health;
-	public int Damage;
-	public float MoveSpeed;
+	[SerializeField]
+	private int Health;
+	[SerializeField]
+	private int Damage;
+	[SerializeField]
+	private float MoveSpeed;
 
 	private void OnTriggerEnter(Collider other)
 	{

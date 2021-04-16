@@ -2,7 +2,8 @@
 
 public class HealthPack : MonoBehaviour
 {
-	public int Health;
+	[SerializeField]
+	private int Health;
 
 	private void OnTriggerEnter(Collider other)
 	{

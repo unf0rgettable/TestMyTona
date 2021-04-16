@@ -53,14 +53,29 @@ public class MeleeAttack : MonoBehaviour, IMobComponent
 		mover.Active = false;
 		yield return new WaitForSeconds(AttackDelay);
 		var playerDistance = (transform.position - Player.Instance.transform.position).Flat().magnitude;
-		if (playerDistance <= DamageDistance)
-		{
-			Player.Instance.TakeDamage(mob.Damage);
-		}
-
 		mover.Active = true;
 		attacking = false;
 		_attackCoroutine = null;
+		if (playerDistance <= DamageDistance)
+        {
+        	if (TryGetComponent(out Kamikadze kamikadze))
+        	{
+        		GetComponent<Explosion>().Exp(transform.position);
+                var colliders = Physics.OverlapSphere(transform.position, 2);
+                foreach (var collider in colliders)
+                {
+	                if (collider.TryGetComponent(out Character characterType))
+	                {
+		                characterType.TakeDamage(mob.Damage);
+	                }
+                }
+        		GetComponent<Character>().TakeDamage(666);
+        	}
+            else
+            {
+	            Player.Instance.TakeDamage(mob.Damage);
+            }
+        }
 	}
 
 	public void OnDeath()
