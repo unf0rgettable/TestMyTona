@@ -1,5 +1,6 @@
 ﻿using MyProject.Events;
 using MyProject.Player;
+using MyProject.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

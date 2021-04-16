@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using MyProject.Events;
 using MyProject.Player;
+using MyProject.Utils;
 using UnityEngine;
 
 namespace MyProject.Mob

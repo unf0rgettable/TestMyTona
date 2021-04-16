@@ -9,6 +9,7 @@ namespace MyProject.Player
 		public const int Shotgun = 1;
 		public const int AutomaticRifle = 2;
 		public const int RocketLauncher = 3;
+		
 		public abstract int Type { get; }
 		public GameObject Model;
 
@@ -33,8 +34,6 @@ namespace MyProject.Player
 			Model.SetActive(type == Type);
 		}
 
-	
-	
 		protected abstract void Fire(PlayerInputMessage message);
 	}
 }

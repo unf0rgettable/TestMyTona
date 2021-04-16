@@ -46,7 +46,7 @@ namespace MyProject.Systems
 			}
 
 			StartCoroutine(Waves(level.WaveDatas, level.WaveInterval, level.Index));
-			EventBus<FieldCreateMessage>.Pub(new FieldCreateMessage(level.GetMap()));
+			EventBus<FieldCreateMessage>.Pub(new FieldCreateMessage(level));
 		}
 
 		private void MobKilled()

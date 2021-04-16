@@ -33,19 +33,17 @@ namespace MyProject.Player
 
 		void Update()
 		{
-			var moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-			// Bonus!
-			// Show this point as you want in HUD
+			Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+			
 			aim.transform.position = Input.mousePosition;
-			var ray = _camera.ScreenPointToRay(Input.mousePosition);
+			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-			var plane = new Plane(Vector3.up, Vector3.up * playerCharacter.transform.position.y);
+			Plane plane = new Plane(Vector3.up, Vector3.up * playerCharacter.transform.position.y);
 			plane.Raycast(ray, out var enter);
-			var aimPos = ray.GetPoint(enter);
-			var aimInput = aimPos - playerCharacter.transform.position;
+			Vector3 aimPos = ray.GetPoint(enter);
+			Vector3 aimInput = aimPos - playerCharacter.transform.position;
 
-			var fire = Input.GetKey(KeyCode.Mouse0);
+			bool fire = Input.GetKey(KeyCode.Mouse0);
 			EventBus<PlayerInputMessage>.Pub(new PlayerInputMessage(
 				move: moveInput.normalized,
 				aim: new Vector2(aimInput.x, aimInput.z).normalized,
