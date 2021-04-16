@@ -38,7 +38,6 @@ namespace MyProject.UI
 
         public void UpdateHP(float hp, float diff)
         {
-            Debug.Log("UpdateHP" + character.gameObject.name);
             var frac = hp / character.MaxHealth;
             Text.text = $"{hp:####}/{character.MaxHealth:####}";
             BarImg.size = new Vector2(frac, BarImg.size.y);

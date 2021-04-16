@@ -3,6 +3,7 @@ using System.Linq;
 using MyProject.Collectables;
 using MyProject.Events;
 using MyProject.Player;
+using MyProject.Weapon;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

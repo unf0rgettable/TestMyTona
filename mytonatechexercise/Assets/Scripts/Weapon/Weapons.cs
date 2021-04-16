@@ -1,4 +1,4 @@
-﻿namespace MyProject.Player
+﻿namespace MyProject.Weapon
 {
     public enum Weapons
     {

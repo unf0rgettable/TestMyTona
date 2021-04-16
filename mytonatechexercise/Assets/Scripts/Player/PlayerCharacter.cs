@@ -1,5 +1,6 @@
 using System;
 using MyProject.Events;
+using MyProject.Weapon;
 
 namespace MyProject.Player
 {
@@ -8,8 +9,8 @@ namespace MyProject.Player
 		public static PlayerCharacter Instance;
 		public float Damage = 1;
 		public float MoveSpeed = 3.5f;
-		public int TypeWeapon = 0;
-		public Action<int> OnWeaponChange = null;
+		public Weapons TypeWeapon;
+		public Action<Weapons> OnWeaponChange = null;
 
 		public Action OnUpgrade = null;
 
@@ -23,6 +24,8 @@ namespace MyProject.Player
 			{
 				Instance = this;
 			}
+			
+			ChangeWeapon(Weapons.AutomaticRifle);
 		}
 
 		private void OnDestroy()
@@ -70,7 +73,7 @@ namespace MyProject.Player
 			OnHPChange?.Invoke(Health, 0);
 		}
 
-		public void ChangeWeapon(int type)
+		public void ChangeWeapon(Weapons type)
 		{
 			TypeWeapon = type;
 			OnWeaponChange?.Invoke(type);

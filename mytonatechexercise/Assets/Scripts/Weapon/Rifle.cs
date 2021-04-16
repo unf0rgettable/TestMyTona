@@ -1,24 +1,24 @@
 ﻿using System.Threading.Tasks;
 using MyProject.Events;
+using MyProject.Player;
+using MyProject.Weapon;
 using UnityEngine;
 
-namespace MyProject.Player
+namespace MyProject.Weapon
 {
 	public class Rifle : PlayerWeapon
 	{
-		public override int Type => PlayerWeapon.Rifle;
-		public Projectile BulletPrefab;
-		public float Reload = 1f;
-		public Transform FirePoint;
-		public ParticleSystem VFX;
+		private Transform _firePoint;
 
 		protected float lastTime;
 
 		protected override void Awake()
 		{
 			base.Awake();
+			_firePoint = GetComponentInChildren<FirePoint>().transform;
+			WeaponSett.VFX = GetComponentInChildren<ParticleSystem>();
 			EventBus<PlayerInputMessage>.Sub(Fire);
-			lastTime = Time.time - Reload;
+			lastTime = Time.time - WeaponSett.Reload;
 		}
 
 		protected virtual float GetDamage()
@@ -28,7 +28,7 @@ namespace MyProject.Player
 
 		protected override async void Fire(PlayerInputMessage message)
 		{
-			if (Time.time - Reload < lastTime)
+			if (Time.time - WeaponSett.Reload < lastTime)
 			{
 				return;
 			}
@@ -43,9 +43,9 @@ namespace MyProject.Player
 
 			await Task.Delay(16);
 
-			var bullet = Instantiate(BulletPrefab, FirePoint.position, transform.rotation);
+			var bullet = Instantiate(WeaponSett.BulletPrefab, _firePoint.position, transform.rotation);
 			bullet.Damage = GetDamage();
-			VFX.Play();
+			WeaponSett.VFX.Play();
 		}
 	}
 }

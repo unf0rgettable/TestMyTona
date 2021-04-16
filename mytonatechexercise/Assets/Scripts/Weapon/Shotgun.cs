@@ -1,25 +1,24 @@
 ﻿using System.Threading.Tasks;
 using MyProject.Events;
+using MyProject.Player;
+using MyProject.Weapon;
 using UnityEngine;
 
-// Bonus!
-// Refactror Rifle, AutomaticRifle and Shotgun classes as you want
-namespace MyProject.Player
+
+namespace MyProject.Weapon
 {
 	public class Shotgun : PlayerWeapon
 	{
-		public override int Type => PlayerWeapon.Shotgun;
-		public Projectile BulletPrefab;
-		public float Reload = 1f;
-		public Transform FirePoint;
-		public ParticleSystem VFX;
+		private Transform _firePoint;
 
 		protected float lastTime;
 
 		protected override void Awake()
 		{
 			base.Awake();
-			lastTime = Time.time - Reload;
+			_firePoint = GetComponentInChildren<FirePoint>().transform;
+			WeaponSett.VFX = GetComponentInChildren<ParticleSystem>();
+			lastTime = Time.time - WeaponSett.Reload;
 		}
 
 		protected virtual float GetDamage()
@@ -29,7 +28,7 @@ namespace MyProject.Player
 
 		protected override async void Fire(PlayerInputMessage message)
 		{
-			if (Time.time - Reload < lastTime)
+			if (Time.time - WeaponSett.Reload < lastTime)
 			{
 				return;
 			}
@@ -46,11 +45,11 @@ namespace MyProject.Player
 			var directions = SpreadDirections(transform.rotation.eulerAngles, 3, 20);
 			foreach (var direction in directions)
 			{
-				var bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.Euler(direction));
+				var bullet = Instantiate(WeaponSett.BulletPrefab, _firePoint.position, Quaternion.Euler(direction));
 				bullet.Damage = GetDamage();
 			}
 
-			VFX.Play();
+			WeaponSett.VFX.Play();
 		}
 
 		public Vector3[] SpreadDirections(Vector3 direction, int num, int spreadAngle)

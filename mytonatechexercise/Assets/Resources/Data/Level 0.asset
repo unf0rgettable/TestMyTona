@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6347a3ae2bfcf4a919dbacb57246d6, type: 3}
   m_Name: Level 0
   m_EditorClassIdentifier: 
-  Index: 0
+  index: 0
   CharMap: '000000000000
 
     000000000000
@@ -41,4 +41,4 @@ MonoBehaviour:
     - {x: 3, y: 1}
     - {x: 0, y: 2}
     - {x: 1, y: 3}
-  WaveInterval: 100
+  WaveInterval: 10

@@ -1,4 +1,5 @@
 ﻿using MyProject.Player;
+using MyProject.Weapon;
 using UnityEngine;
 
 namespace MyProject.Collectables
@@ -6,9 +7,9 @@ namespace MyProject.Collectables
     public class WeaponPowerUp : MonoBehaviour
     {
         [SerializeField]
-        private int type;
+        private Weapons type;
 
-        public int Type => type;
+        public Weapons Type => type;
 
         private void OnTriggerEnter(Collider other)
         {

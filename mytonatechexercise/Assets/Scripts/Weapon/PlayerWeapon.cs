@@ -1,18 +1,14 @@
 ﻿using MyProject.Events;
+using MyProject.Player;
 using UnityEngine;
 
-namespace MyProject.Player
+namespace MyProject.Weapon
 {
 	public abstract class PlayerWeapon : MonoBehaviour
 	{
-		public const int Rifle = 0;
-		public const int Shotgun = 1;
-		public const int AutomaticRifle = 2;
-		public const int RocketLauncher = 3;
-		
-		public abstract int Type { get; }
+		public WeaponSetting WeaponSett;
+		public Weapons Type => WeaponSett.TypePlayerWeapon;
 		public GameObject Model;
-
 		protected virtual void Awake()
 		{
 			GetComponent<PlayerCharacter>().OnWeaponChange += Change;
@@ -23,7 +19,7 @@ namespace MyProject.Player
 			EventBus<PlayerInputMessage>.Unsub(Fire);
 		}
 
-		protected void Change(int type)
+		protected void Change(Weapons type)
 		{
 			EventBus<PlayerInputMessage>.Unsub(Fire);
 			if (type == Type)

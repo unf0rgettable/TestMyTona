@@ -28,7 +28,6 @@ namespace MyProject.Player
 		private void Start()
 		{
 			_camera = Camera.main;
-			Cursor.visible = false;
 		}
 
 		void Update()

@@ -1,5 +1,6 @@
 ﻿using MyProject.Mob;
 using MyProject.Player;
+using MyProject.Weapon;
 using UnityEngine;
 
 namespace MyProject
@@ -30,7 +31,7 @@ namespace MyProject
 			if (DamageMob && other.CompareTag("Mob"))
 			{
 				var mob = other.GetComponent<MobCharacter>();
-				if (PlayerCharacter.Instance.TypeWeapon == PlayerWeapon.RocketLauncher)
+				if (PlayerCharacter.Instance.TypeWeapon == Weapons.RocketLauncher)
 				{
 					GetComponent<Explosion>().Exp(transform.position);
 					var charactersCollider = Physics.OverlapSphere(transform.position, 2);
